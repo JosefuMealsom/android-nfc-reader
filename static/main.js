@@ -29,7 +29,9 @@ function triggerRead() {
 
             count++;
 
-            content.textContent = `Scanned items = ${count}`;
+            const paragraph = document.createElement("p");
+            paragraph.textContent = "Scanned an Item!"
+            content.appendChild(paragraph);
             const sleepTimer = new Promise((resolve) => {
                 setTimeout(() => {
                     resolve();
