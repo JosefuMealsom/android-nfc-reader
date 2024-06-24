@@ -21,9 +21,9 @@ function triggerRead() {
     }
 
     const content = document.getElementById("content");
-    let count = 0;
 
     async function runApplication() {
+        let count = 0;
         while (true) {
             await ndef.scan();
 
