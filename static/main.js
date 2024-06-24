@@ -1,37 +1,44 @@
-const ndef = new NDEFReader();
-let ignoreRead = false;
+const content = document.getElementById("read-button");
 
-function read(data) {
-    ignoreRead = true;
-    return new Promise((resolve, reject) => {
-        ndef.addEventListener(
-            "reading",
-            (event) => {
-                console.log("reading");
-            },
-            { once: false },
-        );
-    });
-}
+content.addEventListener("click", triggerRead);
 
-const content = document.getElementById("content");
-let count = 0;
+function triggerRead() {
 
-async function runApplication() {
-    while (true) {
-        await ndef.scan();
+    const ndef = new NDEFReader();
+    let ignoreRead = false;
 
-        count++;
-
-        content.textContent = `Scanned items = ${count}`;
-        const sleepTimer = new Promise((resolve) => {
-            setTimeout(() => {
-                resolve();
-            }, 500);
+    function read(data) {
+        ignoreRead = true;
+        return new Promise((resolve, reject) => {
+            ndef.addEventListener(
+                "reading",
+                (event) => {
+                    console.log("reading");
+                },
+                { once: false },
+            );
         });
-
-        await sleepTimer;
     }
-}
 
-runApplication();
+    const content = document.getElementById("content");
+    let count = 0;
+
+    async function runApplication() {
+        while (true) {
+            await ndef.scan();
+
+            count++;
+
+            content.textContent = `Scanned items = ${count}`;
+            const sleepTimer = new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve();
+                }, 500);
+            });
+
+            await sleepTimer;
+        }
+    }
+
+    runApplication();
+}
