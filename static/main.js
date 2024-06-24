@@ -7,20 +7,14 @@ function triggerRead() {
     const ndef = new NDEFReader();
     let ignoreRead = false;
 
-    function read(data) {
-        ignoreRead = true;
-        return new Promise((resolve, reject) => {
-            ndef.addEventListener(
-                "reading",
-                (event) => {
-                    const paragraph = document.createElement("p");
-                    paragraph.textContent = "Scanned an Item!";
-                    content.appendChild(paragraph);
-                },
-                { once: false },
-            );
-        });
-    }
+    ndef.addEventListener(
+        "reading",
+        (event) => {
+            const paragraph = document.createElement("p");
+            paragraph.textContent = "Scanned an Item!";
+            content.appendChild(paragraph);
+        },
+    );
 
     const content = document.getElementById("content");
 
