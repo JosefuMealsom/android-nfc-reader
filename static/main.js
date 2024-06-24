@@ -13,7 +13,9 @@ function triggerRead() {
             ndef.addEventListener(
                 "reading",
                 (event) => {
-                    console.log("reading");
+                    const paragraph = document.createElement("p");
+                    paragraph.textContent = "Scanned an Item!";
+                    content.appendChild(paragraph);
                 },
                 { once: false },
             );
@@ -28,17 +30,6 @@ function triggerRead() {
             await ndef.scan();
 
             count++;
-
-            const paragraph = document.createElement("p");
-            paragraph.textContent = "Scanned an Item!"
-            content.appendChild(paragraph);
-            const sleepTimer = new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve();
-                }, 500);
-            });
-
-            await sleepTimer;
         }
     }
 
